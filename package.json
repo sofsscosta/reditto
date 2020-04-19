@@ -6,10 +6,12 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
-    "test": "jest",
+    "test": "jest --runInBand",
     "lint": "eslint ."
   },
   "dependencies": {
+    "moment": "^2.24.0",
+    "node-fetch": "^2.6.0",
     "react": "16.11.0",
     "react-native": "0.62.2"
   },
