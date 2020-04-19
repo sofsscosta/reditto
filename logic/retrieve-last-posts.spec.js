@@ -22,8 +22,6 @@ describe.only('retrieve-last-posts', () => {
     it('should succeed on showing last posts', async () => {
         const posts = await retrieveLastPosts()
 
-        // console.log(posts)
-
         const postsDates = posts.map(el => el.created_utc)
 
         for (let i = 0; i < posts.length; i++) {

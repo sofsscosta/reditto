@@ -2,7 +2,7 @@ import React, { Fragment } from "react"
 import { Text, TouchableOpacity, Image, View } from 'react-native'
 import styles from './style'
 
-export default function Post({ post }) {
+export default Post = ({ post }) => {
 
     return (
         <TouchableOpacity>

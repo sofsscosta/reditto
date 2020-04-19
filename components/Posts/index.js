@@ -3,7 +3,7 @@ import { FlatList, TouchableOpacity } from 'react-native'
 import styles from './style'
 import Post from '../Post'
 
-export default function Posts({ posts, error, goToLink }) {
+export default Posts = ({ posts, error, goToLink }) => {
 
     return (
         <FlatList
