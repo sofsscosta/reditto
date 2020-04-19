@@ -1,7 +1,26 @@
 import { StyleSheet } from 'react-native'
+import { Dimensions } from 'react-native'
 
-const styles = StyleSheet.create({
+const deviceHeight = Dimensions.get('window').height
+const deviceWidth = Dimensions.get('window').width
 
+const dimensions = StyleSheet.create({
+    device: {
+        height: deviceHeight,
+        width: deviceWidth
+    }
 })
 
-export { styles }
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: 'rgb(248, 233, 216)',
+        height: '100%',
+        width: '100%',
+        flex: 1,
+        flexGrow: 1
+    }
+})
+
+
+
+export { styles, dimensions }

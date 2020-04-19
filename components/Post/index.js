@@ -4,19 +4,27 @@ import styles from './style'
 
 export default Post = ({ post }) => {
 
-    return (
-        <TouchableOpacity>
+    console.log(post.title)
 
-            <Image style={styles.thumbnail} source={post.thumbnail} />
-            <View>
-                <Text>{post.created_utc}</Text>
-                <Text>{post.title}</Text>
-                <View>
-                    <Text>{post.author}</Text>
-                    <Text>{post.score}</Text>
-                    <Text>{post.num_comments}</Text>
+    const handleTimeDisplay = () => {
+
+        return post.created_utc
+    }
+
+    return (
+        <View style={styles.main_container}>
+            <Image style={styles.thumbnail} source={{ uri: post.thumbnail }} resizeMode='contain' />
+            <View style={styles.container}>
+                <View style={styles.info_container}>
+                    <Text style={styles.info}>Posted by {post.author}</Text>
+                    <Text style={styles.info}>{handleTimeDisplay()}</Text>
+                </View>
+                <Text style={styles.title}>{post.title}</Text>
+                <View style={styles.secondary_container}>
+                    <Text style={styles.field}>Score: {post.score}</Text>
+                    <Text style={styles.field}>{post.num_comments === 1 ? `${post.num_comments} comment` : `${post.num_comments} comments`}</Text>
                 </View>
             </View>
-        </TouchableOpacity>
+        </View>
     )
 }

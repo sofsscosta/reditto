@@ -3,3 +3,4 @@ config.js
 
 # CocoaPods
 /ios/Pods/
+ios/Podfile.lock

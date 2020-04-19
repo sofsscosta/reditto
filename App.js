@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from 'react'
 import { Posts, Detail } from './components'
+import { StatusBar, View, ImageBackground, ActivityIndicator, Text } from 'react-native'
 import logic from './logic'
 import { retrieveLastPosts } from './logic'
 import { API_URL } from './config'
+import { styles } from './components/style'
 
 logic.__context__.API_URL = API_URL
 
-export default function App() {
+export default App = () => {
 
   const [error, setError] = useState(undefined)
-  const [posts, setPosts] = useState()
   const [view, setView] = useState('landing')
+  const [posts, setPosts] = useState()
+  const [postLink, setPostLink] = useState(undefined)
+
+  // console.log(postLink)
 
   useEffect(() => {
+
     (async () => {
       try {
         const posts = await retrieveLastPosts()
@@ -25,14 +31,25 @@ export default function App() {
     })()
   }, [])
 
-  const handleGoToLink = () => {
+  const handleGoToLink = (link) => {
     setView('detail')
+    // !postLink ?
+    setPostLink(link)
+    // : setPostLink(undefined)
   }
 
   return (
     <>
-      {view === 'landing' && <Posts posts={posts} goToLink={handleGoToLink} error={error} />}
-      {view === 'detail' && <Detail />}
+      <ImageBackground style={styles.container}>
+        <StatusBar barStyle="dark-content" />
+        {view === 'landing' && <Posts posts={posts} goToLink={handleGoToLink} error={error} />}
+        {
+          view === 'detail' &&
+          // postLink &&
+          // <Text style={{ position: 'absolute', alignSelf: 'center', top: '20%' }}>GOT HERE</Text>
+          < Detail link={postLink} goBack={handleGoToLink} />
+        }
+      </ImageBackground>
     </>
   )
 }
