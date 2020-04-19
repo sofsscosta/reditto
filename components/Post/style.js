@@ -6,9 +6,10 @@ const styles = StyleSheet.create({
         height: dimensions.device.height * 0.13,
         width: dimensions.device.height * 0.13,
         alignSelf: 'center',
-        marginHorizontal: dimensions.device.height * 0.01,
+        marginRight: dimensions.device.height * 0.01,
     },
     main_container: {
+        paddingHorizontal: dimensions.device.height * 0.01,
         flexDirection: 'row',
         marginVertical: dimensions.device.height * 0.02,
         backgroundColor: 'white',
