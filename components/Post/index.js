@@ -4,12 +4,17 @@ import styles from './style'
 
 export default Post = ({ post }) => {
 
-    return (
-        <TouchableOpacity>
+    console.log(post.title)
 
-            <Image style={styles.thumbnail} source={post.thumbnail} />
+    const handleTimeDisplay = () => {
+        return post.created_utc
+    }
+
+    return (
+        <>
+            {post.thumbnail !== 'default' && <Image style={styles.thumbnail} source={{ uri: post.thumbnail }} resizeMode='contain' />}
             <View>
-                <Text>{post.created_utc}</Text>
+                <Text>{handleTimeDisplay()}</Text>
                 <Text>{post.title}</Text>
                 <View>
                     <Text>{post.author}</Text>
@@ -17,6 +22,6 @@ export default Post = ({ post }) => {
                     <Text>{post.num_comments}</Text>
                 </View>
             </View>
-        </TouchableOpacity>
+        </>
     )
 }
