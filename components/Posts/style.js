@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
         // width: dimensions.device.width * 0.9,
         alignSelf: 'center',
         margin: dimensions.device.width * 0.05,
-        marginTop: dimensions.device.width * 0.25,
+        marginTop: dimensions.device.width * 0.35,
         shadowColor: "#111",
         shadowOffset: {
             width: 0,

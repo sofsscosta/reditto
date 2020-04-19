@@ -16,13 +16,13 @@ export default Post = ({ post }) => {
             <Image style={styles.thumbnail} source={{ uri: post.thumbnail }} resizeMode='contain' />
             <View style={styles.container}>
                 <View style={styles.info_container}>
-                    <Text style={styles.author}>Posted by {post.author}</Text>
-                    <Text style={styles.date}>{handleTimeDisplay()}</Text>
+                    <Text style={styles.info}>Posted by {post.author}</Text>
+                    <Text style={styles.info}>{handleTimeDisplay()}</Text>
                 </View>
                 <Text style={styles.title}>{post.title}</Text>
                 <View style={styles.secondary_container}>
                     <Text style={styles.field}>Score: {post.score}</Text>
-                    <Text style={styles.field}>Comments: {post.num_comments}</Text>
+                    <Text style={styles.field}>{post.num_comments === 1 ? `${post.num_comments} comment` : `${post.num_comments} comments`}</Text>
                 </View>
             </View>
         </View>
