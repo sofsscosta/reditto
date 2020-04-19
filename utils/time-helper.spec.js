@@ -1,18 +1,41 @@
 const { timeHelper } = require('.')
 
-describe.only('timeHelper', () => {
+describe('timeHelper', () => {
+
+    let seconds, minutes, hours, days, months
 
     beforeEach(async () => {
-        const result = await fetch(API_URL)
-
-        const res = await result.json()
-
-        orderedDates = res.data.children.map(el => el.data.created_utc).sort((a, b) => a - b)
+        seconds = (Date.now()) / 1000
+        minutes = (Date.now() - 90000) / 1000
+        hours = (Date.now() - 3600001) / 1000
+        days = (Date.now() - 90000000) / 1000
+        months = (Date.now() - 2592000000) / 1000
+        years = (Date.now() - 31104000000) / 1000
     })
 
-    it('should succeed on showing last posts', () => {
-        const processed = timeHelper()
+    it('should succeed on displaying date correctly', () => {
+        const formattedSeconds = timeHelper(seconds)
+        const formattedMinutes = timeHelper(minutes)
+        const formattedHours = timeHelper(hours)
+        const formattedDays = timeHelper(days)
+        const formattedMonths = timeHelper(months)
+        const formattedYears = timeHelper(years)
 
-        const postsDates = posts.map(el => el.created_utc)
+        expect(formattedSeconds).toBe('less than a minute ago')
+        expect(formattedMinutes).toBe('1 minute ago')
+        expect(formattedHours).toBe('1 hour ago')
+        expect(formattedDays).toBe('1 day ago')
+        expect(formattedMonths).toBe('1 month ago')
+        expect(formattedYears).toBe('1 year ago')
+
+    })
+
+    it('should fail on non-number date', () => {
+        try {
+            timeHelper('string')
+        }
+        catch (error) {
+            expect(error.message).toBe('date string is not a number')
+        }
     })
 })

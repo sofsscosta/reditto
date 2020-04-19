@@ -26,7 +26,7 @@ module.exports = async function () {
 
     const { error } = res
 
-    if (error) throw new Error(error)
+    if (error) throw new Error('Network error')
 
     return finalResult
 

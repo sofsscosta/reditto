@@ -6,18 +6,13 @@ export default Post = ({ post }) => {
 
     console.log(post.title)
 
-    const handleTimeDisplay = () => {
-
-        return post.created_utc
-    }
-
     return (
         <View style={styles.main_container}>
-            <Image style={styles.thumbnail} source={{ uri: post.thumbnail }} resizeMode='contain' />
+            {post.thumbnail !== 'default' && <Image style={styles.thumbnail} source={{ uri: post.thumbnail }} resizeMode='contain' />}
             <View style={styles.container}>
                 <View style={styles.info_container}>
                     <Text style={styles.info}>Posted by {post.author}</Text>
-                    <Text style={styles.info}>{handleTimeDisplay()}</Text>
+                    <Text style={styles.info}>{post.created_utc}</Text>
                 </View>
                 <Text style={styles.title}>{post.title}</Text>
                 <View style={styles.secondary_container}>
