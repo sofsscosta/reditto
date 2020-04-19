@@ -16,7 +16,7 @@ describe.only('retrieve-last-posts', () => {
 
         const res = await result.json()
 
-        orderedDates = res.data.children.map(el => el.data.created_utc).sort((a, b) => a - b)
+        orderedDates = res.data.children.map(el => el.data.created_utc).sort((a, b) => b - a)
     })
 
     it('should succeed on showing last posts', async () => {
