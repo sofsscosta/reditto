@@ -8,8 +8,6 @@ module.exports = async function () {
 
     const orderedDates = res.data.children.map(el => el.data.created_utc).sort((a, b) => a - b)
 
-    console.log(orderedDates)
-
     let finalResult = []
 
     orderedDates.forEach(el => {
@@ -22,8 +20,6 @@ module.exports = async function () {
                 finalResult.push({ thumbnail, title, id, author, score, created_utc, num_comments, permalink })
         }
     })
-
-    console.log(finalResult)
 
     const { error } = res
 

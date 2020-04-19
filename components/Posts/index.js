@@ -1,12 +1,21 @@
-import React, { Fragment } from "react"
-import { Text, TouchableOpacity } from 'react-native'
+import React from "react"
+import { FlatList, TouchableOpacity } from 'react-native'
 import styles from './style'
+import Post from '../Post'
 
-export default function Posts(props) {
+export default Posts = ({ posts, error, goToLink }) => {
 
     return (
-        <TouchableOpacity style={styles[props.type]} onPress={props.onPress}>
-            <Text style={styles.text}>{props.text}</Text>
-        </TouchableOpacity>
+        <FlatList
+            style={styles.myVeggies_container}
+            data={posts}
+            keyExtractor={item => item.id}
+            renderItem={({ item }) => (
+                <TouchableOpacity onPress={goToLink}>
+                    <Post post={item} error={error} />
+                </TouchableOpacity>
+            )} />
+
     )
 }
+
