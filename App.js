@@ -32,10 +32,26 @@ export default App = () => {
     !postLink ? setPostLink(link) : setPostLink(undefined)
   }
 
+  const handleGoToLastPosts = () => {
+
+  }
+
+  const handleGoToTopPosts = () => {
+
+  }
+
+  const handleGoToHotPosts = () => {
+
+  }
+
+  const handleGoToPolemicalPosts = () => {
+
+  }
+
   return (
     <ImageBackground style={styles.container}>
       <StatusBar barStyle="dark-content" />
-      <Nav />
+      <Nav goToLastPosts={handleGoToLastPosts} goToTopPosts={handleGoToTopPosts} goToHotPosts={handleGoToHotPosts} goToPolemicalPosts={handleGoToPolemicalPosts} />
       {postLink && <Detail link={postLink} goBack={handleGoToLink} />}
       {view === 'landing' && <Posts posts={posts} goToLink={handleGoToLink} error={error} />}
     </ImageBackground>

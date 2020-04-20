@@ -2,7 +2,7 @@ import React from "react"
 import styles from './style'
 import { TouchableOpacity, Text, View } from "react-native"
 
-export default Header = ({ goToLastPosts, goToTopPosts, goToHotPosts, goToPolemicalPosts }) => {
+export default Nav = ({ goToLastPosts, goToTopPosts, goToHotPosts, goToPolemicalPosts }) => {
 
     return (
         <View style={styles.container}>
