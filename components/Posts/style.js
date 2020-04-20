@@ -14,6 +14,9 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.1,
         shadowRadius: 5,
         elevation: 0,
+    },
+    feedback: {
+        top: dimensions.device.width * 0.07,
     }
 })
 
