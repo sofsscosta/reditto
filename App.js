@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Posts, Detail } from './components'
-import { StatusBar, View, ImageBackground, ActivityIndicator, Text } from 'react-native'
+import { Posts, Detail, Nav } from './components'
+import { StatusBar, ImageBackground } from 'react-native'
+import { retrieveLastPosts } from './logic'
 import logic from './logic'
 import { API_URL } from './config'
 import { styles } from './components/style'
@@ -34,8 +35,9 @@ export default App = () => {
   return (
     <ImageBackground style={styles.container}>
       <StatusBar barStyle="dark-content" />
+      <Nav />
       {postLink && <Detail link={postLink} goBack={handleGoToLink} />}
-      {view === 'landing' && <Posts goToLink={handleGoToLink} />}
+      {view === 'landing' && <Posts posts={posts} goToLink={handleGoToLink} error={error} />}
     </ImageBackground>
   )
 }
