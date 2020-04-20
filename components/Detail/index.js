@@ -13,9 +13,7 @@ export default Detail = ({ link, goBack }) => {
             style={styles.modal}
             transparent={true}
             visible={isVisible}>
-            <TouchableOpacity
-                onPress={() => { setIsVisible(!isVisible); return goBack() }}
-                style={styles.background}>
+            <View style={styles.background}>
                 <View style={styles.container}>
                     <TouchableOpacity
                         onPress={() => { setIsVisible(!isVisible); return goBack() }}>
@@ -30,7 +28,7 @@ export default Detail = ({ link, goBack }) => {
                             onLoad={() => (<ActivityIndicator size='large' color="rgb(0,0,0)" />)} />
                     </View>
                 </View>
-            </TouchableOpacity >
+            </View >
         </Modal >
     )
 }

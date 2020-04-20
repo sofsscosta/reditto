@@ -2,13 +2,12 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
     modal: {
-        zIndex: 10,
         flex: 0
     },
     background: {
         height: '100%',
         width: '100%',
-        backgroundColor: 'rgba(0,0,0,0.5)'
+        backgroundColor: 'rgba(0,0,0,0.5)',
     },
     container: {
         width: '90%',
@@ -30,7 +29,8 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         alignSelf: 'center',
-        borderRadius: 10
+        borderRadius: 10,
+        zIndex: 20,
     },
     webview: {
         height: '100%',
