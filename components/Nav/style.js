@@ -3,8 +3,8 @@ import { dimensions, colors } from '../style'
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: dimensions.device.width * 0.25,
-        marginBottom: dimensions.device.width * 0.05,
+        marginTop: dimensions.device.width * 0.17,
+        // marginBottom: dimensions.device.width * 0.05,
         flexDirection: 'row',
         justifyContent: 'space-around',
     },
