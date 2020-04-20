@@ -20,7 +20,11 @@ describe('retrieve-top-posts', () => {
 
         orderedByScores = res.sort((a, b) => b.data.score - a.data.score || b.data.created_utc - a.data.created_utc)
 
+        console.log(orderedByScores.map(el => { return { score: el.data.score, num_comments: el.data.num_comments, created_utc: el.data.created_utc, num_comments: el.data.num_comments } }))
+
         orderedDatesRelative = orderedByScores.map(el => timeHelper(el.data.created_utc))
+
+        console.log(orderedDatesRelative)
     })
 
     it('should succeed on showing top posts', async () => {

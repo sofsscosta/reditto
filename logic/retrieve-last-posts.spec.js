@@ -18,9 +18,14 @@ describe('retrieve-last-posts', () => {
         let res = await result.json()
         res = res.data.children
 
-        orderedDates = res.sort((a, b) => { b.data.created_utc - a.data.created_utc })
+        orderedDates = res.sort((a, b) => b.data.created_utc - a.data.created_utc)
+
+        console.log(orderedDates.map(el => { return { score: el.data.score, num_comments: el.data.num_comments, created_utc: el.data.created_utc, num_comments: el.data.num_comments } }))
 
         orderedDatesRelative = orderedDates.map(el => timeHelper(el.data.created_utc))
+
+        console.log(orderedDatesRelative)
+
     })
 
     it('should succeed on showing last posts', async () => {
