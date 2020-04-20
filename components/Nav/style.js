@@ -14,6 +14,9 @@ const styles = StyleSheet.create({
         width: dimensions.device.width * 0.245,
         justifyContent: 'center'
     },
+    option_pressed: {
+        backgroundColor: colors.mainColor.color
+    },
     option_text: {
         fontSize: 15,
         fontWeight: '100',

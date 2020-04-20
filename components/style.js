@@ -13,7 +13,7 @@ const dimensions = StyleSheet.create({
 
 const colors = StyleSheet.create({
     mainColor: {
-        color: 'rgb(240, 230, 220)'
+        color: 'rgb(248, 233, 216)'
     },
     navColor: {
         color: 'rgba(254, 250, 246, 1)'
