@@ -51,17 +51,7 @@ export default App = () => {
   }
 
   const handleGoToPolemicalPosts = async () => {
-    try {
-      setError(undefined)
-      setLoading(true)
-      const posts = await retrievePolemicalPosts()
-      setPosts(posts)
-      return setLoading(false)
-    }
-    catch (error) {
-      setLoading(false)
-      return setError(error.message)
-    }
+    handleRedirects(retrievePolemicalPosts)
   }
 
   return (
