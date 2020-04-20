@@ -1,6 +1,5 @@
 const config = require('../config')
-const { retrieveLastPosts } = require('.')
-const { timeHelper } = require('../utils')
+const { retrieveTopPosts } = require('.')
 const fetch = require('node-fetch')
 const { API_URL } = require('../config')
 
@@ -8,29 +7,26 @@ const logic = require('.')
 
 logic.__context__.API_URL = config.API_URL
 
-describe.only('retrieve-last-posts', () => {
+describe.only('retrieve-top-posts', () => {
 
-    let orderedDates = [], orderedDatesRelative = []
+    let orderedDates
 
     beforeEach(async () => {
         const result = await fetch(API_URL)
 
-        let res = await result.json()
-        res = res.data.children
+        const res = await result.json()
 
-        orderedDates = res.sort((a, b) => { b.data.created_utc - a.data.created_utc })
-
-        orderedDatesRelative = orderedDates.map(el => timeHelper(el.data.created_utc))
+        orderedByScores = res.data.children.map(el => el.data.score).sort((a, b) => (a.score > b.score) ? 1 : -1)
     })
 
-    it('should succeed on showing last posts', async () => {
-        const posts = await retrieveLastPosts()
+    it('should succeed on showing top posts', async () => {
+        const posts = await retrieveTopPosts()
 
         const postsDates = posts.map(el => el.created_utc)
 
         for (let i = 0; i < posts.length; i++) {
 
-            expect(posts[i].created_utc).toBe(orderedDatesRelative[i])
+            expect(posts[i].created_utc).toBeDefined()
             expect(posts[i].title).toBeDefined()
             expect(posts[i].thumbnail).toBeDefined()
             expect(posts[i].author).toBeDefined()

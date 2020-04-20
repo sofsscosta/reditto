@@ -5,24 +5,21 @@ const fetch = require('node-fetch')
 module.exports = async function () {
 
     const retrieve = await fetch(this.API_URL)
-    const res = await retrieve.json()
+    let res = await retrieve.json()
+    res = res.data.children
 
-    const orderedDates = res.data.children.map(el => el.data.created_utc).sort((a, b) => b - a)
+    const orderedByDates = res.sort((a, b) => { b.data.created_utc - a.data.created_utc })
 
     let finalResult = []
 
-    orderedDates.forEach(el => {
+    for (let post of orderedByDates) {
 
-        for (let post of res.data.children) {
+        const { thumbnail, title, id, author, score, created_utc, num_comments, permalink } = post.data
 
-            const { thumbnail, title, id, author, score, created_utc, num_comments, permalink } = post.data
+        const relativeDate = timeHelper(created_utc)
 
-            if (post.data.created_utc === el) {
-                const relativeDate = timeHelper(post.data.created_utc)
-                finalResult.push({ thumbnail, title, id, author, score, created_utc: relativeDate, num_comments, permalink })
-            }
-        }
-    })
+        finalResult.push({ thumbnail, title, id, author, score, created_utc: relativeDate, num_comments, permalink })
+    }
 
     const { error } = res
 
