@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Posts, Detail, Nav, Spinner } from './components'
 import { StatusBar, ImageBackground, ActivityIndicator, View } from 'react-native'
-import { retrieveLastPosts, retrieveTopPosts } from './logic'
+import { retrieveLastPosts, retrieveTopPosts, retrieveOldPosts } from './logic'
 import logic from './logic'
 import { API_URL } from './config'
 import { styles } from './components/style'
@@ -26,29 +26,44 @@ export default App = () => {
 
   const handleGoToLastPosts = async () => {
     try {
+      setError(undefined)
       setLoading(true)
       const posts = await retrieveLastPosts()
       setPosts(posts)
       return setLoading(false)
     }
     catch (error) {
+      setLoading(false)
       return setError(error.message)
     }
   }
 
   const handleGoToTopPosts = async () => {
     try {
+      setError(undefined)
       setLoading(true)
       const posts = await retrieveTopPosts()
       setPosts(posts)
       return setLoading(false)
     }
     catch (error) {
+      setLoading(false)
       return setError(error.message)
     }
   }
 
-  const handleGoToHotPosts = () => {
+  const handleGoToOldPosts = async () => {
+    try {
+      setError(undefined)
+      setLoading(true)
+      const posts = await retrieveOldPosts()
+      setPosts(posts)
+      return setLoading(false)
+    }
+    catch (error) {
+      setLoading(false)
+      return setError(error.message)
+    }
 
   }
 
@@ -59,7 +74,7 @@ export default App = () => {
   return (
     <ImageBackground style={styles.container}>
       <StatusBar barStyle="dark-content" />
-      <Nav goToLastPosts={handleGoToLastPosts} goToTopPosts={handleGoToTopPosts} goToHotPosts={handleGoToHotPosts} goToPolemicalPosts={handleGoToPolemicalPosts} />
+      <Nav goToLastPosts={handleGoToLastPosts} goToTopPosts={handleGoToTopPosts} goToOldPosts={handleGoToOldPosts} goToPolemicalPosts={handleGoToPolemicalPosts} />
       {postLink && <Detail link={postLink} goBack={handleGoToLink} />}
       {loading && <Spinner />}
       {view === 'landing' && <Posts posts={posts} goToLink={handleGoToLink} error={error} />}

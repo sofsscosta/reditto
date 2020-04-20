@@ -8,7 +8,7 @@ const logic = require('.')
 
 logic.__context__.API_URL = config.API_URL
 
-describe.only('retrieve-top-posts', () => {
+describe('retrieve-top-posts', () => {
 
     let orderedByScores = [], orderedDatesRelative = []
 

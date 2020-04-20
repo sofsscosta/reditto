@@ -1,5 +1,5 @@
 const config = require('../config')
-const { retrieveLastPosts } = require('.')
+const { retrieveOlderPosts } = require('.')
 const { timeHelper } = require('../utils')
 const fetch = require('node-fetch')
 const { API_URL } = require('../config')
@@ -8,7 +8,7 @@ const logic = require('.')
 
 logic.__context__.API_URL = config.API_URL
 
-describe('retrieve-last-posts', () => {
+describe('retrieve-older-posts', () => {
 
     let orderedDates = [], orderedDatesRelative = []
 
@@ -18,13 +18,13 @@ describe('retrieve-last-posts', () => {
         let res = await result.json()
         res = res.data.children
 
-        orderedDates = res.sort((a, b) => { b.data.created_utc - a.data.created_utc })
+        orderedDates = res.sort((a, b) => a.data.created_utc - b.data.created_utc)
 
         orderedDatesRelative = orderedDates.map(el => timeHelper(el.data.created_utc))
     })
 
-    it('should succeed on showing last posts', async () => {
-        const posts = await retrieveLastPosts()
+    it('should succeed on showing older posts first', async () => {
+        const posts = await retrieveOlderPosts()
 
         const postsDates = posts.map(el => el.created_utc)
 

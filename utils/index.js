@@ -1,3 +1,3 @@
 module.exports = {
-    timeHelper: require('./time-helper')
+    processPostsInfo: require('./process-posts-info')
 }

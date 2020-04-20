@@ -1,6 +1,6 @@
 const context = require('./context')
-const { timeHelper } = require('../utils')
 const fetch = require('node-fetch')
+const { processPostsInfo } = require('../utils')
 
 module.exports = async function () {
 
@@ -10,20 +10,10 @@ module.exports = async function () {
 
     const orderedByScore = res.sort((a, b) => b.data.score - a.data.score || b.data.created_utc - a.data.created_utc)
 
-    let finalResult = []
-
-    for (let post of orderedByScore) {
-
-        const { thumbnail, title, id, author, score, created_utc, num_comments, permalink } = post.data
-        const relativeDate = timeHelper(created_utc)
-
-        finalResult.push({ thumbnail, title, id, author, score, created_utc: relativeDate, num_comments, permalink })
-    }
-
     const { error } = res
 
     if (error) throw new Error('Network error')
 
-    return finalResult
+    return processPostsInfo(orderedByScore)
 
 }.bind(context)
