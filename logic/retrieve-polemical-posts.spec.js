@@ -18,18 +18,15 @@ describe('retrieve-hot-posts', () => {
         let res = await result.json()
         res = res.data.children
 
-        orderedDates = res.sort((a, b) =>
-            b.data.downs - a.data.downs || b.data.score - a.data.score
-        )
-        console.log(orderedDates.map(el => { return { score: el.data.score, ups: el.data.ups, downs: el.data.downs } }))
+        orderedDates = res.sort((a, b) => b.data.num_comments - a.data.num_comments || b.data.score - a.data.score)
+
+        console.log(orderedDates.map(el => { return { score: el.data.score, num_comments: el.data.num_comments } }))
 
         orderedDatesRelative = orderedDates.map(el => timeHelper(el.data.created_utc))
     })
 
     it('should succeed on showing hot posts', async () => {
         const posts = await retrieveHotPosts()
-
-        const postsDates = posts.map(el => el.created_utc)
 
         for (let i = 0; i < posts.length; i++) {
 

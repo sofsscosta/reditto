@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Posts, Detail, Nav, Spinner } from './components'
 import { StatusBar, ImageBackground, ActivityIndicator, View } from 'react-native'
-import { retrieveLastPosts, retrieveTopPosts, retrieveOldPosts } from './logic'
+import { retrieveLastPosts, retrieveTopPosts, retrieveOldPosts, retrievePolemicalPosts } from './logic'
 import logic from './logic'
 import { API_URL } from './config'
 import { styles } from './components/style'
@@ -24,11 +24,11 @@ export default App = () => {
     !postLink ? setPostLink(link) : setPostLink(undefined)
   }
 
-  const handleGoToLastPosts = async () => {
+  const handleRedirects = async (fun) => {
     try {
       setError(undefined)
       setLoading(true)
-      const posts = await retrieveLastPosts()
+      const posts = await fun()
       setPosts(posts)
       return setLoading(false)
     }
@@ -38,11 +38,23 @@ export default App = () => {
     }
   }
 
-  const handleGoToTopPosts = async () => {
+  const handleGoToLastPosts = () => {
+    handleRedirects(retrieveLastPosts)
+  }
+
+  const handleGoToTopPosts = () => {
+    handleRedirects(retrieveTopPosts)
+  }
+
+  const handleGoToOldPosts = () => {
+    handleRedirects(retrieveOldPosts)
+  }
+
+  const handleGoToPolemicalPosts = async () => {
     try {
       setError(undefined)
       setLoading(true)
-      const posts = await retrieveTopPosts()
+      const posts = await retrievePolemicalPosts()
       setPosts(posts)
       return setLoading(false)
     }
@@ -50,25 +62,6 @@ export default App = () => {
       setLoading(false)
       return setError(error.message)
     }
-  }
-
-  const handleGoToOldPosts = async () => {
-    try {
-      setError(undefined)
-      setLoading(true)
-      const posts = await retrieveOldPosts()
-      setPosts(posts)
-      return setLoading(false)
-    }
-    catch (error) {
-      setLoading(false)
-      return setError(error.message)
-    }
-
-  }
-
-  const handleGoToPolemicalPosts = () => {
-
   }
 
   return (
