@@ -1,26 +1,9 @@
 import React, { useEffect, useState } from "react"
 import { FlatList, TouchableOpacity, ActivityIndicator } from 'react-native'
-import { retrieveLastPosts } from '../../logic'
 import styles from './style'
 import Post from '../Post'
 
-export default Posts = ({ goToLink }) => {
-
-    const [error, setError] = useState(undefined)
-    const [posts, setPosts] = useState()
-
-    useEffect(() => {
-        (async () => {
-            try {
-                const posts = await retrieveLastPosts()
-                setPosts(posts)
-            }
-            catch (error) {
-                console.log(error)
-                setError(error)
-            }
-        })()
-    }, [])
+export default Posts = ({ posts, goToLink, error }) => {
 
     return (
         <FlatList

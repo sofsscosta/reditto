@@ -1,11 +1,11 @@
-import Header from './Header'
+import Nav from './Nav'
 import Footer from './Footer'
 import Posts from './Posts'
 import Detail from './Detail'
 import Feedback from './Feedback'
 
 export {
-    Header,
+    Nav,
     Footer,
     Posts,
     Detail,

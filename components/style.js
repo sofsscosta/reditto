@@ -11,6 +11,15 @@ const dimensions = StyleSheet.create({
     }
 })
 
+const colors = StyleSheet.create({
+    mainColor: {
+        color: 'rgb(240, 230, 220)'
+    },
+    navColor: {
+        color: 'rgba(254, 250, 246, 1)'
+    }
+})
+
 const styles = StyleSheet.create({
     container: {
         backgroundColor: 'rgb(248, 233, 216)',
@@ -23,4 +32,4 @@ const styles = StyleSheet.create({
 
 
 
-export { styles, dimensions }
+export { styles, dimensions, colors }
