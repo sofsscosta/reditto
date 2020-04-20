@@ -1,48 +1,46 @@
-import React, { TouchableWithoutFeedback, TouchableOpacity, ActivityIndicator, View } from "react"
+import React, { useState, useEffect } from "react"
+import { TouchableOpacity, Modal, ActivityIndicator, View, Text } from 'react-native'
 import { WebView } from 'react-native-webview'
 import styles from './style'
 
 export default Detail = ({ link, goBack }) => {
 
-    console.log(link)
+    const [isVisible, setIsVisible] = useState(true)
 
     return (
-
-        // <TouchableOpacity onPress={() => goBack()}>
-
-        // <View style={{
-        //     height: '100%',
-        //     width: '100%',
-        //     flex: 1,
-        //     flexGrow: 1
-        // }}>
-        <WebView
-            useWebKit={true}
-            style={{
-                width: '90%', height: '80%',
-                position: 'absolute',
-                marginTop: '20%', alignSelf: 'center', zIndex: 20,
-                flex: 1
-            }}
-            source={{ uri: `https://www.reddit.com${link}` }}
-            startInLoadingState={true}
-            onLoad={() => (<ActivityIndicator size='large' color="#ffffff"
-                style={{ height: 80, marginTop: 10 }} />)}
+        <Modal
+            animationType="fade"
+            style={{ zIndex: 10, flex: 0 }}
+            transparent={true}
+            visible={isVisible}
         >
-        </WebView>
-        // </View>
-        // </TouchableOpacity>
+            <View style={{ height: '100%', width: '100%', backgroundColor: 'rgba(0,0,0,0.5)' }}>
 
-        // <WebView
-        //     startInLoadingState={true}
-        //     hidesWhenStopped={true}
-        //     renderLoading={() => (<ActivityIndicator
-        //         animating={true}
-        //         color="#ffffff"
-        //         style={{ height: 80, marginTop: 10 }}
-        //         size="large" />)}
-        //     style={{ marginTop: '20%', width: '100%', height: '80%', position: 'absolute', zIndex: 30 }}
-        //     source={{ uri: `https://www.reddit.com${link}` }}
-        // />
+                <View>
+                    <TouchableOpacity onPress={() => { setIsVisible(!isVisible); return goBack() }}>
+                        <Text style={{ fontSize: 100 }}>X</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={{
+                    width: '90%', height: '80%',
+                    //  marginTop: '10%', 
+                    overflow: 'hidden', alignSelf: 'center', borderRadius: 10
+                }}>
+
+                    <WebView
+                        useWebKit={true}
+                        style={{
+                            height: '100%', width: '100%',
+                        }}
+                        source={{ uri: `https://www.reddit.com${link}` }}
+                        startInLoadingState={true}
+                        onLoad={() => (<ActivityIndicator size='large' color="rgb(0,0,0)"
+                            style={{ height: '100%' }} />)}
+
+                    >
+                    </WebView>
+                </View>
+            </View>
+        </Modal>
     )
 }

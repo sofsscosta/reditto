@@ -13,9 +13,7 @@ export default App = () => {
   const [error, setError] = useState(undefined)
   const [view, setView] = useState('landing')
   const [posts, setPosts] = useState()
-  const [postLink, setPostLink] = useState(undefined)
-
-  // console.log(postLink)
+  const [postLink, setPostLink] = useState()
 
   useEffect(() => {
 
@@ -32,24 +30,14 @@ export default App = () => {
   }, [])
 
   const handleGoToLink = (link) => {
-    setView('detail')
-    // !postLink ?
-    setPostLink(link)
-    // : setPostLink(undefined)
+    !postLink ? setPostLink(link) : setPostLink(undefined)
   }
 
   return (
-    <>
-      <ImageBackground style={styles.container}>
-        <StatusBar barStyle="dark-content" />
-        {view === 'landing' && <Posts posts={posts} goToLink={handleGoToLink} error={error} />}
-        {
-          view === 'detail' &&
-          // postLink &&
-          // <Text style={{ position: 'absolute', alignSelf: 'center', top: '20%' }}>GOT HERE</Text>
-          < Detail link={postLink} goBack={handleGoToLink} />
-        }
-      </ImageBackground>
-    </>
+    <ImageBackground style={styles.container}>
+      <StatusBar barStyle="dark-content" />
+      {postLink && <Detail link={postLink} goBack={handleGoToLink} error={error} />}
+      {view === 'landing' && <Posts posts={posts} goToLink={handleGoToLink} error={error} />}
+    </ImageBackground>
   )
 }
