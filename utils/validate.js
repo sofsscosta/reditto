@@ -5,5 +5,9 @@ module.exports = {
 
             if (typeof target !== type) throw new TypeError(`${name} ${target} is not a ${type}`)
         } else if (!(target instanceof type)) throw new TypeError(`${name} ${target} is not a ${type.name}`)
+    },
+
+    array(target, name) {
+        if (!(target instanceof Array)) throw new TypeError(`${name} ${target} is not an array`)
     }
 }

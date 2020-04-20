@@ -8,7 +8,7 @@ module.exports = async function () {
     let res = await retrieve.json()
     res = res.data.children
 
-    const orderedByDates = res.sort((a, b) => { b.data.created_utc - a.data.created_utc })
+    const orderedByDates = res.sort((a, b) => a.data.created_utc - b.data.created_utc)
 
     const { error } = res
 

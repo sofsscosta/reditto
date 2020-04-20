@@ -5,9 +5,6 @@ module.exports = (date) => {
 
     const relativeTime = Date.now() - (date * 1000)
 
-    console.log('date', date)
-    console.log('relativeTime', relativeTime)
-
     if (relativeTime < 60000) {
         return `less than a minute ago`
     }

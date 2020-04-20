@@ -8,12 +8,12 @@ module.exports = async function () {
     let res = await retrieve.json()
     res = res.data.children
 
-    const orderedByDates = res.sort((a, b) => { b.data.created_utc - a.data.created_utc })
+    const orderedByScore = res.sort((a, b) => b.data.score - a.data.score || b.data.created_utc - a.data.created_utc)
 
     const { error } = res
 
     if (error) throw new Error('Network error')
 
-    return processPostsInfo(orderedByDates)
+    return processPostsInfo(orderedByScore)
 
 }.bind(context)

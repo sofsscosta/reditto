@@ -1,20 +1,29 @@
 import React, { useEffect, useState } from "react"
-import { FlatList, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { FlatList, TouchableOpacity, ActivityIndicator, View } from 'react-native'
+import Feedback from '../Feedback'
 import styles from './style'
 import Post from '../Post'
 
 export default Posts = ({ posts, goToLink, error }) => {
 
+    console.log('error in posts', error)
+
     return (
-        <FlatList
-            style={styles.container}
-            data={posts}
-            keyExtractor={item => item.id}
-            renderItem={({ item }) => (
-                <TouchableOpacity onPress={() => goToLink(item.permalink)}>
-                    <Post post={item} error={error} />
-                </TouchableOpacity>
-            )} />
+        <>
+            {error &&
+                <View style={styles.feedback}>
+                    <Feedback level='error' message={error} />
+                </View>}
+            <FlatList
+                style={styles.container}
+                data={posts}
+                keyExtractor={item => item.id}
+                renderItem={({ item }) => (
+                    <TouchableOpacity onPress={() => goToLink(item.permalink)}>
+                        <Post post={item} />
+                    </TouchableOpacity>
+                )} />
+        </>
 
     )
 }
