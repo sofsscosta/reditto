@@ -11,7 +11,6 @@ logic.__context__.API_URL = API_URL
 export default App = () => {
 
   const [error, setError] = useState()
-  const [view, setView] = useState('landing')
   const [postLink, setPostLink] = useState()
   const [posts, setPosts] = useState()
   const [loading, setLoading] = useState(false)
@@ -56,11 +55,10 @@ export default App = () => {
 
   return (
     <ImageBackground style={styles.container}>
-      <StatusBar barStyle="dark-content" />
       <Nav goToLastPosts={handleGoToLastPosts} goToTopPosts={handleGoToTopPosts} goToOldPosts={handleGoToOldPosts} goToPolemicalPosts={handleGoToPolemicalPosts} />
       {postLink && <Detail link={postLink} goBack={handleGoToLink} />}
       {loading && <Spinner />}
-      {view === 'landing' && <Posts posts={posts} goToLink={handleGoToLink} error={error} />}
+      <Posts posts={posts} goToLink={handleGoToLink} error={error} />
     </ImageBackground>
   )
 }
