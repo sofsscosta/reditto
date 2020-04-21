@@ -1,12 +1,28 @@
-import React, { Fragment } from "react"
-import { Text, TouchableOpacity } from 'react-native'
+import React from "react"
+import { FlatList, TouchableOpacity, View } from 'react-native'
+import Feedback from '../Feedback'
 import styles from './style'
+import Post from '../Post'
 
-export default function Posts(props) {
+export default Posts = ({ posts, goToLink, error }) => {
 
     return (
-        <TouchableOpacity style={styles[props.type]} onPress={props.onPress}>
-            <Text style={styles.text}>{props.text}</Text>
-        </TouchableOpacity>
+        <>
+            {error &&
+                <View style={styles.feedback}>
+                    <Feedback level='error' message={error} />
+                </View>}
+            <FlatList
+                style={styles.container}
+                data={posts}
+                keyExtractor={item => item.id}
+                renderItem={({ item }) => (
+                    <TouchableOpacity onPress={() => goToLink(item.permalink)}>
+                        <Post post={item} />
+                    </TouchableOpacity>
+                )} />
+        </>
+
     )
 }
+

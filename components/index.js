@@ -1,11 +1,13 @@
-import Header from './Header'
-import Footer from './Footer'
+import Nav from './Nav'
 import Posts from './Posts'
-import Post from './Post'
+import Detail from './Detail'
+import Feedback from './Feedback'
+import Spinner from './Spinner'
 
 export {
-    Header,
-    Footer,
-    Post,
-    Posts
+    Nav,
+    Posts,
+    Detail,
+    Feedback,
+    Spinner
 }

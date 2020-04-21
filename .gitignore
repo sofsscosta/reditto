@@ -1,4 +1,7 @@
 node_modules
+config.js
+.env
 
 # CocoaPods
 /ios/Pods/
+ios/Podfile.lock

@@ -1,26 +1,68 @@
-import React, { useState, useEffect, Fragment } from 'react'
-import {
-  Posts, Post, Header, Footer
-} from './components'
-import logic from './logic'
-// import { retrieve } from './logic'
-import { AsyncStorage } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { Posts, Detail, Nav, Spinner } from './components'
+import { ImageBackground } from 'react-native'
 import { API_URL } from './config'
+import { styles } from './components/style'
 
-logic.__context__.storage = AsyncStorage
-logic.__context__.API_URL = API_URL
+import { last, top, old, polemical } from './logic/type'
+import { retrievePosts } from './utils'
+import { processPostsInfo } from './utils'
 
-export default function App() {
+export default App = () => {
 
-  // const [error, setError] = useState()
-  // const [view, setView] = useState('landing')
+  const [error, setError] = useState()
+  const [postLink, setPostLink] = useState()
+  const [posts, setPosts] = useState()
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    (() => handleGoToLastPosts())()
+  }, [])
+
+  const handleGoToLink = (link) => {
+    !postLink ? setPostLink(link) : setPostLink(undefined)
+  }
+
+  const handleRedirects = async (sortingFunction) => {
+    try {
+      setError(undefined)
+      setLoading(true)
+
+      const retrieve = await retrievePosts(API_URL)
+      let posts = sortingFunction(retrieve.data.children)
+      posts = processPostsInfo(posts)
+
+      setPosts(posts)
+      return setLoading(false)
+    }
+    catch (error) {
+      setLoading(false)
+      return setError(error.message)
+    }
+  }
+
+  const handleGoToLastPosts = () => {
+    handleRedirects(last)
+  }
+
+  const handleGoToTopPosts = () => {
+    handleRedirects(top)
+  }
+
+  const handleGoToOldPosts = () => {
+    handleRedirects(old)
+  }
+
+  const handleGoToPolemicalPosts = () => {
+    handleRedirects(polemical)
+  }
 
   return (
-    <Fragment>
-      < Header />
-      {/* {view === 'landing' && <Posts />}
-      {view === 'detail' && <Post />} */}
-      <Footer />
-    </Fragment>
+    <ImageBackground style={styles.container}>
+      <Nav goToLastPosts={handleGoToLastPosts} goToTopPosts={handleGoToTopPosts} goToOldPosts={handleGoToOldPosts} goToPolemicalPosts={handleGoToPolemicalPosts} />
+      {postLink && <Detail link={postLink} goBack={handleGoToLink} />}
+      {loading && <Spinner />}
+      <Posts posts={posts} goToLink={handleGoToLink} error={error} />
+    </ImageBackground>
   )
 }

@@ -6,12 +6,16 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
-    "test": "jest",
+    "test": "jest --runInBand --detectOpenHandles",
+    "test:coverage": "react-scripts test --runInBand --coverage --no-cache",
     "lint": "eslint ."
   },
   "dependencies": {
+    "moment": "^2.24.0",
+    "node-fetch": "^2.6.0",
     "react": "16.11.0",
-    "react-native": "0.62.2"
+    "react-native": "0.62.2",
+    "react-native-webview": "^9.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
