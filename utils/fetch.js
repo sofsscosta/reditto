@@ -1,6 +1,5 @@
-const context = require('./context')
+const context = require('../logic/context')
 const fetch = require('node-fetch')
-const { processPostsInfo } = require('../utils')
 
 module.exports = function () {
 
@@ -9,18 +8,15 @@ module.exports = function () {
         try {
             const retrieve = await fetch(this.API_URL)
             let res = await retrieve.json()
-            res = res.data.children
-
-            const orderedByDates = res.sort((a, b) => b.data.created_utc - a.data.created_utc)
-
             const { error } = res
 
             if (error) throw new Error(error.message)
 
-            return processPostsInfo(orderedByDates)
+            return res
         }
 
         catch (error) {
+            console.log(error)
             throw new Error('Oops! Connection problem here.')
         }
     })()

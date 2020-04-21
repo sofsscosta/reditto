@@ -6,6 +6,12 @@ import logic from './logic'
 import { API_URL } from './config'
 import { styles } from './components/style'
 
+import { type } from './logic'
+import { last, top, old, polemical } from './logic/type'
+import { fetch } from './utils'
+import { processPostsInfo } from './utils'
+
+
 logic.__context__.API_URL = API_URL
 
 export default App = () => {
@@ -25,9 +31,14 @@ export default App = () => {
 
   const handleRedirects = async (fun) => {
     try {
+      console.log(fun)
       setError(undefined)
       setLoading(true)
-      const posts = await fun()
+
+      const retrieve = await fetch()
+      let posts = fun(retrieve.data.children)
+      posts = processPostsInfo(posts)
+
       setPosts(posts)
       return setLoading(false)
     }
@@ -38,19 +49,19 @@ export default App = () => {
   }
 
   const handleGoToLastPosts = () => {
-    handleRedirects(retrieveLastPosts)
+    handleRedirects(last)
   }
 
   const handleGoToTopPosts = () => {
-    handleRedirects(retrieveTopPosts)
+    handleRedirects(top)
   }
 
   const handleGoToOldPosts = () => {
-    handleRedirects(retrieveOldPosts)
+    handleRedirects(old)
   }
 
   const handleGoToPolemicalPosts = async () => {
-    handleRedirects(retrievePolemicalPosts)
+    handleRedirects(polemical)
   }
 
   return (

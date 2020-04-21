@@ -2,7 +2,6 @@ const timeHelper = require('./time-helper')
 const validate = require('./validate')
 
 module.exports = (posts) => {
-
     validate.array(posts, 'posts')
 
     let finalResult = []

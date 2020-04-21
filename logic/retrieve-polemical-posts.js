@@ -2,18 +2,27 @@ const context = require('./context')
 const fetch = require('node-fetch')
 const { processPostsInfo } = require('../utils')
 
-module.exports = async function () {
+module.exports = function () {
 
-    const retrieve = await fetch(this.API_URL)
-    let res = await retrieve.json()
-    res = res.data.children
+    return (async () => {
 
-    const orderedByDates = res.sort((a, b) => b.data.num_comments - a.data.num_comments || b.data.score - a.data.score)
+        try {
+            const retrieve = await fetch(this.API_URL)
+            let res = await retrieve.json()
+            res = res.data.children
 
-    const { error } = res
+            const orderedByDates = res.sort((a, b) => b.data.num_comments - a.data.num_comments || b.data.score - a.data.score)
 
-    if (error) throw new Error('Network error')
+            const { error } = res
 
-    return processPostsInfo(orderedByDates)
+            if (error) throw new Error(error.message)
+
+            return processPostsInfo(orderedByDates)
+        }
+
+        catch (error) {
+            throw new Error('Oops! Connection problem here.')
+        }
+    })()
 
 }.bind(context)
