@@ -1,12 +1,11 @@
-const context = require('../logic/context')
 const fetch = require('node-fetch')
 
-module.exports = function () {
+module.exports = function (url) {
 
     return (async () => {
 
         try {
-            const retrieve = await fetch(this.API_URL)
+            const retrieve = await fetch(url)
             let res = await retrieve.json()
 
             const { error } = res
@@ -22,5 +21,4 @@ module.exports = function () {
         }
 
     })()
-
-}.bind(context)
+}

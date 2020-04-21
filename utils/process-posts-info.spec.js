@@ -1,20 +1,15 @@
-const config = require('../config')
 const { processPostsInfo } = require('.')
 const fetch = require('node-fetch')
 const { API_URL } = require('../config')
-
-const logic = require('../logic')
-
-logic.__context__.API_URL = config.API_URL
 
 describe('processPostsInfo', () => {
 
     let result
 
     beforeEach(async () => {
-        const res = await fetch(API_URL)
+        const response = await fetch(API_URL)
 
-        result = await res.json()
+        result = await response.json()
         result = result.data.children
     })
 

@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Posts, Detail, Nav, Spinner } from './components'
 import { ImageBackground } from 'react-native'
-import logic from './logic'
 import { API_URL } from './config'
 import { styles } from './components/style'
 
 import { last, top, old, polemical } from './logic/type'
 import { fetch } from './utils'
 import { processPostsInfo } from './utils'
-
-logic.__context__.API_URL = API_URL
 
 export default App = () => {
 
@@ -26,13 +23,13 @@ export default App = () => {
     !postLink ? setPostLink(link) : setPostLink(undefined)
   }
 
-  const handleRedirects = async (fun) => {
+  const handleRedirects = async (sortingFunction) => {
     try {
       setError(undefined)
       setLoading(true)
 
-      const retrieve = await fetch()
-      let posts = fun(retrieve.data.children)
+      const retrieve = await fetch(API_URL)
+      let posts = sortingFunction(retrieve.data.children)
       posts = processPostsInfo(posts)
 
       setPosts(posts)
@@ -40,25 +37,24 @@ export default App = () => {
     }
     catch (error) {
       setLoading(false)
-      console.log(error)
       return setError(error.message)
     }
   }
 
-  const handleGoToLastPosts = () => {
-    handleRedirects(last)
+  const handleGoToLastPosts = async () => {
+    await handleRedirects(last)
   }
 
-  const handleGoToTopPosts = () => {
-    handleRedirects(top)
+  const handleGoToTopPosts = async () => {
+    await handleRedirects(top)
   }
 
-  const handleGoToOldPosts = () => {
-    handleRedirects(old)
+  const handleGoToOldPosts = async () => {
+    await handleRedirects(old)
   }
 
   const handleGoToPolemicalPosts = async () => {
-    handleRedirects(polemical)
+    await handleRedirects(polemical)
   }
 
   return (
