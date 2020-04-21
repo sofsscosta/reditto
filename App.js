@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Posts, Detail, Nav, Spinner } from './components'
-import { StatusBar, ImageBackground, ActivityIndicator, View } from 'react-native'
-import { retrieveLastPosts, retrieveTopPosts, retrieveOldPosts, retrievePolemicalPosts } from './logic'
+import { ImageBackground } from 'react-native'
 import logic from './logic'
 import { API_URL } from './config'
 import { styles } from './components/style'
 
-import { type } from './logic'
 import { last, top, old, polemical } from './logic/type'
 import { fetch } from './utils'
 import { processPostsInfo } from './utils'

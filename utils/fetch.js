@@ -8,8 +8,8 @@ module.exports = function () {
         try {
             const retrieve = await fetch(this.API_URL)
             let res = await retrieve.json()
-            const { error } = res
 
+            const { error } = res
             if (error) throw new Error(error.message)
 
             return res

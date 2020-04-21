@@ -1,6 +1,8 @@
 const fetch = require('./fetch')
 const logic = require('../logic')
 
+jest.setTimeout(30000)
+
 describe('fetch', () => {
 
     it('should succeed on valid url', async () => {
