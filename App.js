@@ -5,7 +5,7 @@ import { API_URL } from './config'
 import { styles } from './components/style'
 
 import { last, top, old, polemical } from './logic/type'
-import { fetch } from './utils'
+import { retrievePosts } from './utils'
 import { processPostsInfo } from './utils'
 
 export default App = () => {
@@ -28,7 +28,7 @@ export default App = () => {
       setError(undefined)
       setLoading(true)
 
-      const retrieve = await fetch(API_URL)
+      const retrieve = await retrievePosts(API_URL)
       let posts = sortingFunction(retrieve.data.children)
       posts = processPostsInfo(posts)
 
@@ -41,20 +41,20 @@ export default App = () => {
     }
   }
 
-  const handleGoToLastPosts = async () => {
-    await handleRedirects(last)
+  const handleGoToLastPosts = () => {
+    handleRedirects(last)
   }
 
-  const handleGoToTopPosts = async () => {
-    await handleRedirects(top)
+  const handleGoToTopPosts = () => {
+    handleRedirects(top)
   }
 
-  const handleGoToOldPosts = async () => {
-    await handleRedirects(old)
+  const handleGoToOldPosts = () => {
+    handleRedirects(old)
   }
 
-  const handleGoToPolemicalPosts = async () => {
-    await handleRedirects(polemical)
+  const handleGoToPolemicalPosts = () => {
+    handleRedirects(polemical)
   }
 
   return (

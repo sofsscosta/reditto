@@ -1,8 +1,8 @@
-const fetch = require('./fetch')
+const retrievePosts = require('./retrieve-posts')
 
 jest.setTimeout(30000)
 
-describe('fetch', () => {
+describe('retrievePosts', () => {
 
     it('should succeed on valid url', async () => {
         const sites = [
@@ -15,7 +15,7 @@ describe('fetch', () => {
 
         let site = sites[Math.floor(Math.random() * sites.length)]
 
-        const response = await fetch(site.url)
+        const response = await retrievePosts(site.url)
 
         expect(response).toBeDefined()
         expect(response).toBeInstanceOf(Object)
@@ -26,7 +26,7 @@ describe('fetch', () => {
         let url = 'invalid-url'
 
         try {
-            await fetch(url)
+            await retrievePosts(url)
         } catch (error) {
             expect(error).toBeDefined()
             expect(error.message).toBe('Only absolute URLs are supported')
@@ -37,7 +37,7 @@ describe('fetch', () => {
         let url = 'https://non-existing.url'
 
         try {
-            await fetch(url)
+            await retrievePosts(url)
         } catch (error) {
             expect(error).toBeDefined()
             expect(error.message).toBe('request to https://non-existing.url/ failed, reason: getaddrinfo ENOTFOUND non-existing.url')

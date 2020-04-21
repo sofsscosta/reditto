@@ -1,6 +1,6 @@
 module.exports = {
     processPostsInfo: require('./process-posts-info'),
     timeHelper: require('./time-helper'),
-    fetch: require('./fetch'),
+    retrievePosts: require('./retrieve-posts'),
     validate: require('./validate')
 }

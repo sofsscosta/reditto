@@ -1,6 +1,6 @@
 const fetch = require('node-fetch')
 
-module.exports = function (url) {
+module.exports = (url) => {
 
     return (async () => {
 
@@ -19,6 +19,5 @@ module.exports = function (url) {
 
             else throw new Error(error.message)
         }
-
     })()
 }
