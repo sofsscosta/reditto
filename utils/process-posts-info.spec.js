@@ -1,5 +1,5 @@
 const config = require('../config')
-const { timeHelper, processPostsInfo } = require('.')
+const { processPostsInfo } = require('.')
 const fetch = require('node-fetch')
 const { API_URL } = require('../config')
 
@@ -9,19 +9,17 @@ logic.__context__.API_URL = config.API_URL
 
 describe('processPostsInfo', () => {
 
-    let result, orderedDatesRelative = []
+    let result
 
     beforeEach(async () => {
         const res = await fetch(API_URL)
 
         result = await res.json()
         result = result.data.children
-
-        // orderedDatesRelative = result.map(el => timeHelper(el.data.created_utc))
     })
 
-    it('should succeed on displaying date correctly', async () => {
-        let processed = await processPostsInfo(result)
+    it('should succeed on displaying date correctly', () => {
+        let processed = processPostsInfo(result)
 
         for (let i in processed) {
             expect(processed[i].thumbnail).toBe(result[i].data.thumbnail)

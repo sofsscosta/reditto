@@ -31,7 +31,6 @@ export default App = () => {
 
   const handleRedirects = async (fun) => {
     try {
-      console.log(fun)
       setError(undefined)
       setLoading(true)
 
@@ -44,6 +43,7 @@ export default App = () => {
     }
     catch (error) {
       setLoading(false)
+      console.log(error)
       return setError(error.message)
     }
   }

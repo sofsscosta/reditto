@@ -16,9 +16,11 @@ module.exports = function () {
         }
 
         catch (error) {
-            console.log(error)
-            throw new Error('Oops! Connection problem here.')
+            if (error.message === 'Network request failed') throw new Error('Oops! Connection problem here.')
+
+            else throw new Error(error.message)
         }
+
     })()
 
 }.bind(context)
