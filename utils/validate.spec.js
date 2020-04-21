@@ -19,4 +19,16 @@ describe('validate', () => {
             expect(() => validate.type(target, name, type)).toThrow(TypeError, `${name} ${target} is not a ${type.name.toLowerCase()}`)
         })
     })
+
+    describe('array', () => {
+        it('should succeed on passed array', () => {
+            const name = 'something'
+
+            let target = [1, 2, 3]
+            expect(() => validate.array(target, name)).not.toThrow(TypeError, `${name} ${target} is not an array`)
+
+            target = 'not an array'
+            expect(() => validate.array(target, name)).toThrow(TypeError, `${name} ${target} is not an array`)
+        })
+    })
 })

@@ -6,8 +6,6 @@ import Post from '../Post'
 
 export default Posts = ({ posts, goToLink, error }) => {
 
-    console.log('error in posts', error)
-
     return (
         <>
             {error &&
