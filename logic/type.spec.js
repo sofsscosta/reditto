@@ -1,46 +1,106 @@
-const config = require('../config')
-const { retrieveTopPosts } = require('.')
-const { timeHelper } = require('../utils')
-const fetch = require('node-fetch')
-const { API_URL } = require('../config')
+const { type } = require('.')
 
-const logic = require('.')
+describe('type', () => {
 
-logic.__context__.API_URL = config.API_URL
-
-describe('retrieve-top-posts', () => {
-
-    let orderedByScores = [], orderedDatesRelative = []
+    let info = [], data, score, created_utc, num_comments, ordered
 
     beforeEach(async () => {
-        const result = await fetch(API_URL)
 
-        let res = await result.json()
-        res = res.data.children
+        for (let i = 0; i < 30; i++) {
+            score = Math.floor(Math.random() * 99999)
+            created_utc = Math.floor(Math.random() * 99999)
+            num_comments = Math.floor(Math.random() * 99999)
 
-        orderedByScores = res.sort((a, b) => b.data.score - a.data.score || b.data.created_utc - a.data.created_utc)
+            data = { score, created_utc, num_comments }
 
-        console.log(orderedByScores.map(el => { return { score: el.data.score, num_comments: el.data.num_comments, created_utc: el.data.created_utc, num_comments: el.data.num_comments } }))
-
-        orderedDatesRelative = orderedByScores.map(el => timeHelper(el.data.created_utc))
-
-        console.log(orderedDatesRelative)
+            info.push({ data })
+        }
     })
 
-    it('should succeed on showing top posts', async () => {
-        const posts = await retrieveTopPosts()
+    afterEach(() => info = [])
 
-        for (let i = 0; i < posts.length; i++) {
+    describe('last', () => {
 
-            expect(posts[i].created_utc).toBe(orderedDatesRelative[i])
-            expect(posts[i].title).toBe(orderedByScores[i].data.title)
-            expect(posts[i].thumbnail).toBe(orderedByScores[i].data.thumbnail)
-            expect(posts[i].author).toBe(orderedByScores[i].data.author)
-            expect(posts[i].id).toBe(orderedByScores[i].data.id)
-            expect(posts[i].score).toBe(orderedByScores[i].data.score)
-            expect(posts[i].num_comments).toBe(orderedByScores[i].data.num_comments)
-            expect(posts[i].permalink).toBe(orderedByScores[i].data.permalink)
+        beforeEach(() => {
+            ordered = info.sort((a, b) => b.data.created_utc - a.data.created_utc)
+        })
+
+        it('should display the last published posts', () => {
+            const results = type.last(info)
+
+            expect(results).toHaveLength(30)
+
+            for (let i in results) {
+                expect(results[i].score).toBe(ordered[i].score)
+                expect(results[i].created_utc).toBe(ordered[i].created_utc)
+                expect(results[i].num_comments).toBe(ordered[i].num_comments)
+            }
+        })
+    })
+
+    describe('top', () => {
+
+        beforeEach(() => {
+            ordered = info.sort((a, b) => b.data.score - a.data.score || b.data.created_utc - a.data.created_utc)
+        })
+
+        it('should display the top published posts', () => {
+            const results = type.top(info)
+
+            expect(results).toHaveLength(30)
+
+            for (let i in results) {
+                expect(results[i].score).toBe(ordered[i].score)
+                expect(results[i].created_utc).toBe(ordered[i].created_utc)
+                expect(results[i].num_comments).toBe(ordered[i].num_comments)
+            }
+        })
+    })
+
+    describe('polemical', () => {
+
+        beforeEach(() => {
+            ordered = info.sort((a, b) => b.data.num_comments - a.data.num_comments || b.data.score - a.data.score)
+        })
+
+        it('should display the polemical published posts', () => {
+            const results = type.polemical(info)
+
+            expect(results).toHaveLength(30)
+
+            for (let i in results) {
+                expect(results[i].score).toBe(ordered[i].score)
+                expect(results[i].created_utc).toBe(ordered[i].created_utc)
+                expect(results[i].num_comments).toBe(ordered[i].num_comments)
+            }
+        })
+    })
+
+    describe('old', () => {
+
+        beforeEach(() => {
+            ordered = info.sort((a, b) => a.data.created_utc - b.data.created_utc)
+        })
+
+        it('should display the old published posts', () => {
+            const results = type.old(info)
+
+            expect(results).toHaveLength(30)
+
+            for (let i in results) {
+                expect(results[i].score).toBe(ordered[i].score)
+                expect(results[i].created_utc).toBe(ordered[i].created_utc)
+                expect(results[i].num_comments).toBe(ordered[i].num_comments)
+            }
+        })
+    })
+
+    it('should fail on non-array query', () => {
+        try {
+            type.last('string')
         }
-
+        catch (error) {
+            expect(error.message).toBe("array string is not an array")
+        }
     })
 })
