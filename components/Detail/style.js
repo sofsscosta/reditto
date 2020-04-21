@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     container: {
         width: '90%',
         height: '80%',
-        marginTop: '20%',
+        marginTop: '25%',
         overflow: 'hidden',
         alignSelf: 'center',
         backgroundColor: 'white',

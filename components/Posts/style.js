@@ -3,7 +3,6 @@ import { dimensions } from '../style'
 
 const styles = StyleSheet.create({
     container: {
-        // width: dimensions.device.width * 0.9,
         alignSelf: 'center',
         marginTop: dimensions.device.width * 0.05,
         margin: dimensions.device.width * 0.05,
