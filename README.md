@@ -12,7 +12,7 @@ Build with React Native CLI
 
 Jest was used for testing.
 
-![Code coverage](./code-coverage.png)
+![Code coverage](./images/code-coverage.png)
 
 ## Trello
 
