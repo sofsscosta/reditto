@@ -1,9 +1,8 @@
-const fetch = require('./fetch')
-const logic = require('../logic')
+const retrievePosts = require('./retrieve-posts')
 
 jest.setTimeout(30000)
 
-describe('fetch', () => {
+describe('retrievePosts', () => {
 
     it('should succeed on valid url', async () => {
         const sites = [
@@ -16,9 +15,7 @@ describe('fetch', () => {
 
         let site = sites[Math.floor(Math.random() * sites.length)]
 
-        logic.__context__.API_URL = site.url
-
-        const response = await fetch()
+        const response = await retrievePosts(site.url)
 
         expect(response).toBeDefined()
         expect(response).toBeInstanceOf(Object)
@@ -28,10 +25,8 @@ describe('fetch', () => {
     it('should fail on invalid url', async () => {
         let url = 'invalid-url'
 
-        logic.__context__.API_URL = url
-
         try {
-            await fetch()
+            await retrievePosts(url)
         } catch (error) {
             expect(error).toBeDefined()
             expect(error.message).toBe('Only absolute URLs are supported')
@@ -41,15 +36,11 @@ describe('fetch', () => {
     it('should fail on valid non-existing url', async () => {
         let url = 'https://non-existing.url'
 
-        logic.__context__.API_URL = url
-
         try {
-            await fetch()
+            await retrievePosts(url)
         } catch (error) {
             expect(error).toBeDefined()
             expect(error.message).toBe('request to https://non-existing.url/ failed, reason: getaddrinfo ENOTFOUND non-existing.url')
         }
     })
-
-    afterEach(() => logic.__context__.API_URL = '')
 })
