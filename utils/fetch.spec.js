@@ -15,7 +15,6 @@ describe('fetch', () => {
         ]
 
         let site = sites[Math.floor(Math.random() * sites.length)]
-        console.log(site.url)
 
         logic.__context__.API_URL = site.url
 
