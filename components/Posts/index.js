@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react"
-import { FlatList, TouchableOpacity, ActivityIndicator, View } from 'react-native'
+import React from "react"
+import { FlatList, TouchableOpacity, View } from 'react-native'
 import Feedback from '../Feedback'
 import styles from './style'
 import Post from '../Post'

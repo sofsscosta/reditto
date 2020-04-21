@@ -6,8 +6,8 @@ module.exports = function () {
     return (async () => {
 
         try {
-            const retrieve = await fetch(this.API_URL)
-            let res = await retrieve.json()
+            const response = await fetch(this.API_URL)
+            let res = await response.json()
 
             const { error } = res
             if (error) throw new Error(error.message)
