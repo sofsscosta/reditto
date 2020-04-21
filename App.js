@@ -3,10 +3,13 @@ import { Posts, Detail, Nav, Spinner } from './components'
 import { StatusBar, ImageBackground, ActivityIndicator, View } from 'react-native'
 import { retrieveLastPosts, retrieveTopPosts, retrieveOldPosts, retrievePolemicalPosts } from './logic'
 import logic from './logic'
-import { API_URL } from './config'
+// import { API_URL } from './config'
+import Config from 'react-native-config'
 import { styles } from './components/style'
 
-logic.__context__.API_URL = API_URL
+console.log('API_URL', Config)
+
+logic.__context__.API_URL = Config.API_URL
 
 export default App = () => {
 
