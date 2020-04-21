@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { TouchableOpacity, Modal, ActivityIndicator, View, Text } from 'react-native'
 import { WebView } from 'react-native-webview'
 import styles from './style'
+import { Spinner } from '../'
 
 export default Detail = ({ link, goBack }) => {
 
@@ -25,7 +26,7 @@ export default Detail = ({ link, goBack }) => {
                             style={styles.webview}
                             source={{ uri: `https://www.reddit.com${link}` }}
                             startInLoadingState={true}
-                            onLoad={() => (<ActivityIndicator size='large' color="rgb(0,0,0)" />)} />
+                            onLoad={() => (<Spinner />)} />
                     </View>
                 </View>
             </View >

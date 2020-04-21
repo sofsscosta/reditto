@@ -9,7 +9,6 @@ import { last, top, old, polemical } from './logic/type'
 import { fetch } from './utils'
 import { processPostsInfo } from './utils'
 
-
 logic.__context__.API_URL = API_URL
 
 export default App = () => {
