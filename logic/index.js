@@ -1,3 +1,3 @@
 module.exports = {
-    type: require('./type')
+    category: require('./category')
 }

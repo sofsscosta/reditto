@@ -1,19 +1,12 @@
 # Reditto
 
-Reditto allows users to sort reddit posts by several categories and permits access to the original reddit post when tapping on a displayed post.
+Reditto allows users to sort reddit posts by several categories and permits access to the original reddit post when tapping on a diaplayed post.
 
-Categories are organized by:
-
-<ul>
-<li>Last (based on most recent creating date);</li>
-<li>Top (based on highest scored posts);</li>
-<li>Polemical (most commented);</li>
-<li>Older.</li>
-</ul>
+Categories are organized by last (based on most recent creating date), top (based on highest scored posts), polemical (most commented) and older.
 
 Info for the posts taken from: https://api.reddit.com/r/pics/new.json
 
-Built with React Native CLI
+Build with React Native CLI
 
 ## Code coverage
 
