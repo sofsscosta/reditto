@@ -3,8 +3,8 @@ import { Posts, Detail, Nav, Spinner } from './components'
 import { ImageBackground } from 'react-native'
 import { API_URL } from './config'
 import { styles } from './components/style'
+import { last } from './logic/type'
 
-import { last, top, old, polemical } from './logic/type'
 import { retrievePosts } from './utils'
 import { processPostsInfo } from './utils'
 
@@ -16,7 +16,7 @@ export default App = () => {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    (() => handleGoToLastPosts())()
+    (() => handleRedirects(last))()
   }, [])
 
   const handleGoToLink = (link) => {
@@ -41,25 +41,9 @@ export default App = () => {
     }
   }
 
-  const handleGoToLastPosts = () => {
-    handleRedirects(last)
-  }
-
-  const handleGoToTopPosts = () => {
-    handleRedirects(top)
-  }
-
-  const handleGoToOldPosts = () => {
-    handleRedirects(old)
-  }
-
-  const handleGoToPolemicalPosts = () => {
-    handleRedirects(polemical)
-  }
-
   return (
     <ImageBackground style={styles.container}>
-      <Nav goToLastPosts={handleGoToLastPosts} goToTopPosts={handleGoToTopPosts} goToOldPosts={handleGoToOldPosts} goToPolemicalPosts={handleGoToPolemicalPosts} />
+      <Nav goToPosts={handleRedirects} />
       {postLink && <Detail link={postLink} goBack={handleGoToLink} />}
       {loading && <Spinner />}
       <Posts posts={posts} goToLink={handleGoToLink} error={error} />
