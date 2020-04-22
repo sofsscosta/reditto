@@ -1,6 +1,6 @@
-const { type } = require('.')
+const { category } = require('.')
 
-describe('type', () => {
+describe('category', () => {
 
     let info = [], data, score, created_utc, num_comments, ordered
 
@@ -26,7 +26,7 @@ describe('type', () => {
         })
 
         it('should display the last published posts', () => {
-            const results = type.last(info)
+            const results = category.last(info)
 
             expect(results).toHaveLength(30)
 
@@ -45,7 +45,7 @@ describe('type', () => {
         })
 
         it('should display the top published posts', () => {
-            const results = type.top(info)
+            const results = category.top(info)
 
             expect(results).toHaveLength(30)
 
@@ -64,7 +64,7 @@ describe('type', () => {
         })
 
         it('should display the polemical published posts', () => {
-            const results = type.polemical(info)
+            const results = category.polemical(info)
 
             expect(results).toHaveLength(30)
 
@@ -83,7 +83,7 @@ describe('type', () => {
         })
 
         it('should display the old published posts', () => {
-            const results = type.old(info)
+            const results = category.old(info)
 
             expect(results).toHaveLength(30)
 
@@ -97,7 +97,7 @@ describe('type', () => {
 
     it('should fail on non-array query', () => {
         try {
-            type.last('string')
+            category.last('string')
         }
         catch (error) {
             expect(error.message).toBe("array string is not an array")

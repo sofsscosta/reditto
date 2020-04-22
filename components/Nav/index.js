@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import styles from './style'
 import { TouchableOpacity, Text, View } from "react-native"
-import { last, top, old, polemical } from '../../logic/type'
+import { last, top, old, polemical } from '../../logic/category'
 
 export default Nav = ({ goToPosts }) => {
 

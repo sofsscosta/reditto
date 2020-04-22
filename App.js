@@ -3,7 +3,7 @@ import { Posts, Detail, Nav, Spinner } from './components'
 import { ImageBackground } from 'react-native'
 import { API_URL } from './config'
 import { styles } from './components/style'
-import { last } from './logic/type'
+import { last } from './logic/category'
 
 import { retrievePosts } from './utils'
 import { processPostsInfo } from './utils'
