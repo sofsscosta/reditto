@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { Posts, Detail, Nav, Spinner } from './components'
 import { ImageBackground } from 'react-native'
-import { API_URL } from './config'
+import Config from 'react-native-config'
 import { styles } from './components/style'
 import { last } from './logic/category'
 
 import { retrievePosts } from './utils'
 import { processPostsInfo } from './utils'
+
+console.log(Config)
 
 export default App = () => {
 
@@ -28,7 +30,7 @@ export default App = () => {
       setError(undefined)
       setLoading(true)
 
-      const retrieve = await retrievePosts(API_URL)
+      const retrieve = await retrievePosts(Config.API_URL)
       let posts = sortingFunction(retrieve.data.children)
       posts = processPostsInfo(posts)
 
