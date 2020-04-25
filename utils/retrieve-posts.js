@@ -1,6 +1,6 @@
-const fetch = require('node-fetch')
+import fetch from 'node-fetch'
 
-module.exports = (url) => {
+export const retrievePosts = (url) => {
 
     return (async () => {
 
