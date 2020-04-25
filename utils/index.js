@@ -1,6 +1,11 @@
-module.exports = {
-    processPostsInfo: require('./process-posts-info'),
-    timeHelper: require('./time-helper'),
-    retrievePosts: require('./retrieve-posts'),
-    validate: require('./validate')
+import { processPostsInfo } from './process-posts-info'
+import { timeHelper } from './time-helper'
+import { retrievePosts } from './retrieve-posts'
+import { validate } from './validate'
+
+export {
+    processPostsInfo,
+    timeHelper,
+    retrievePosts,
+    validate
 }

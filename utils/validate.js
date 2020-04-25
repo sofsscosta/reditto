@@ -1,4 +1,4 @@
-module.exports = {
+export const validate = {
     type(target, name, type) {
         if (type === String || type === Number || type === Boolean) {
             type = type.name.toLowerCase()

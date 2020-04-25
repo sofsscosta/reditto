@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Posts, Detail, Nav, Spinner } from './components'
+import { Posts, Detail, Categories, Spinner } from './components'
 import { ImageBackground } from 'react-native'
 import Config from 'react-native-config'
 import { styles } from './components/style'
@@ -7,8 +7,6 @@ import { last } from './logic/category'
 
 import { retrievePosts } from './utils'
 import { processPostsInfo } from './utils'
-
-console.log(Config)
 
 export default App = () => {
 
@@ -45,7 +43,7 @@ export default App = () => {
 
   return (
     <ImageBackground style={styles.container}>
-      <Nav goToPosts={handleRedirects} />
+      <Categories goToPosts={handleRedirects} />
       {postLink && <Detail link={postLink} goBack={handleGoToLink} />}
       {loading && <Spinner />}
       <Posts posts={posts} goToLink={handleGoToLink} error={error} />

@@ -1,6 +1,6 @@
-const validate = require('./validate')
+import { validate } from './validate'
 
-module.exports = (date) => {
+export const timeHelper = (date) => {
     validate.type(date, 'date', Number)
 
     const relativeTime = Date.now() - (date * 1000)
