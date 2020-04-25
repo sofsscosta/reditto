@@ -1,7 +1,7 @@
-const timeHelper = require('./time-helper')
-const validate = require('./validate')
+import { timeHelper } from './time-helper'
+import { validate } from './validate'
 
-module.exports = (posts) => {
+export const processPostsInfo = (posts) => {
     validate.array(posts, 'posts')
 
     let finalResult = []

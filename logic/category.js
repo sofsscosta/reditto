@@ -1,4 +1,5 @@
-const { validate } = require('../utils')
+import { validate } from '../utils'
+console.log(validate)
 
 module.exports = {
     last: (array) => {

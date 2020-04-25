@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Posts, Detail, Nav, Spinner } from './components'
+import { Posts, Detail, Categories, Spinner } from './components'
 import { ImageBackground } from 'react-native'
-import { API_URL } from './config'
+import Config from 'react-native-config'
 import { styles } from './components/style'
 import { last } from './logic/category'
 
@@ -28,7 +28,7 @@ export default App = () => {
       setError(undefined)
       setLoading(true)
 
-      const retrieve = await retrievePosts(API_URL)
+      const retrieve = await retrievePosts(Config.API_URL)
       let posts = sortingFunction(retrieve.data.children)
       posts = processPostsInfo(posts)
 
@@ -43,7 +43,7 @@ export default App = () => {
 
   return (
     <ImageBackground style={styles.container}>
-      <Nav goToPosts={handleRedirects} />
+      <Categories goToPosts={handleRedirects} />
       {postLink && <Detail link={postLink} goBack={handleGoToLink} />}
       {loading && <Spinner />}
       <Posts posts={posts} goToLink={handleGoToLink} error={error} />
