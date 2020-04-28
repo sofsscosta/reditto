@@ -1,13 +1,13 @@
-const { processPostsInfo } = require('.')
-const fetch = require('node-fetch')
-const { API_URL } = require('../config')
+import { processPostsInfo } from '.'
+import fetch from 'node-fetch'
+import Config from 'react-native-config'
 
 describe('processPostsInfo', () => {
 
     let result
 
     beforeEach(async () => {
-        const response = await fetch(API_URL)
+        const response = await fetch(Config.API_URL)
 
         result = await response.json()
         result = result.data.children

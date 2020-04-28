@@ -1,7 +1,6 @@
 import { validate } from '../utils'
-console.log(validate)
 
-module.exports = {
+export const category = {
     last: (array) => {
         validate.array(array, 'array')
 

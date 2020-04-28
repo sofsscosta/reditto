@@ -1,4 +1,4 @@
-const retrievePosts = require('./retrieve-posts')
+import { retrievePosts } from '.'
 
 jest.setTimeout(30000)
 
