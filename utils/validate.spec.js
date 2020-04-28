@@ -1,4 +1,4 @@
-const validate = require('./validate')
+import { validate } from '.'
 
 describe('validate', () => {
 

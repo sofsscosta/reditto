@@ -1,3 +1,2 @@
-module.exports = {
-    category: require('./category')
-}
+import { category } from './category'
+export { category } 

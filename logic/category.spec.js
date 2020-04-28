@@ -1,4 +1,4 @@
-const { category } = require('.')
+import { category } from './category'
 
 describe('category', () => {
 

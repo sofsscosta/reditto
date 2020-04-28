@@ -1,4 +1,4 @@
-const { timeHelper } = require('.')
+import { timeHelper } from '.'
 
 describe('timeHelper', () => {
 

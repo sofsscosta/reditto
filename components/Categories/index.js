@@ -1,11 +1,14 @@
 import React, { useState } from "react"
 import styles from './style'
 import { TouchableOpacity, FlatList, Text, View } from "react-native"
-import { last, top, old, polemical } from '../../logic/category'
+import { category } from '../../logic/category'
 
 export default Categories = ({ goToPosts }) => {
 
     const [pressed, setPressed] = useState('last')
+
+    const { last, top, polemical, old } = category
+
     const categories = [
         { name: 'last', category: last, id: '0' },
         { name: 'top', category: top, id: '1' },

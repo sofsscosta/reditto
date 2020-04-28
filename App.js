@@ -3,7 +3,7 @@ import { Posts, Detail, Categories, Spinner } from './components'
 import { ImageBackground } from 'react-native'
 import Config from 'react-native-config'
 import { styles } from './components/style'
-import { last } from './logic/category'
+import { category } from './logic/category'
 
 import { retrievePosts } from './utils'
 import { processPostsInfo } from './utils'
@@ -16,7 +16,7 @@ export default App = () => {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    (() => handleRedirects(last))()
+    (() => handleRedirects(category.last))()
   }, [])
 
   const handleGoToLink = (link) => {
@@ -25,6 +25,7 @@ export default App = () => {
 
   const handleRedirects = async (sortingFunction) => {
     try {
+      console.log('sorting function app', sortingFunction)
       setError(undefined)
       setLoading(true)
 
