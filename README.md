@@ -14,6 +14,10 @@ Jest was used for testing.
 
 ![Code coverage](./images/code-coverage.png)
 
+## Demo
+
+![Demo](./images/demo.gif)
+
 ## Trello
 
 [Redditto trello](https://trello.com/b/NML1S0Hy/mitto-reddit)
